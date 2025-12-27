@@ -1,0 +1,76 @@
+/* =====================
+   NAVBAR BOOTSTRAP
+===================== */
+.pucakes-navbar {
+  background-color: var(--white);
+  border-bottom: 1px solid var(--divider);
+  padding: 0.5rem 1rem;
+  /* Forzamos la altura exacta para coordinar con el padding del body */
+  height: 72px; 
+  min-height: 72px;
+}
+
+/* Logo + marca */
+.navbar-logo {
+  height: 40px;
+  width: auto;
+}
+
+.brand-text {
+  font-size: 22px;
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+/* Links (Offcanvas) */
+.nav-link {
+  color: var(--primary-dark) !important;
+  font-size: 18px;
+}
+
+.nav-link:hover {
+  color: var(--accent) !important;
+}
+
+/* Carrito */
+.cart-icon {
+  display: flex;
+  align-items: center;
+}
+
+.cart-icon img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+/* Hamburguesa */
+.navbar-toggler {
+  border: none;
+  padding: 0;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+.navbar-toggler-icon {
+  background-image: none;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-toggler-icon::before {
+  content: "\f0c9"; /* Código unicode para icono de menú si usas FontAwesome, o usa el símbolo "≡" */
+  font-family: "Font Awesome 5 Free"; 
+  font-weight: 900;
+  font-size: 24px;
+  color: var(--primary-dark);
+}
+
+/* Si no usas FontAwesome, descomenta esta línea y borra la de arriba */
+/* .navbar-toggler-icon::before { content: "≡"; font-size: 30px; color: var(--primary-dark); } */
+
+/* OFFCANVAS */
+.offcanvas { background-color: var(--white); }
+.offcanvas-title { color: var(--primary-dark); font-size: 22px; }

@@ -1,0 +1,50 @@
+
+cambio algo en el models: python manage.py makemigrations
+python manage.py migrate
+
+levantar el servidor: python manage.py runserver
+
+
+admin: fatima
+contraseña: contraseña
+
+
+
+Arquitectura orientada al dominio (Domain-Driven), simple y limpia:
+
+Product:
+	Información comercial común a todo: nombre, descripción, precio, estado (activo / inactivo)
+
+Cake:
+	Configuración específica de tortas: tamaño (IMA / RUBI / LASSIE), sabor (MEAT / CHICKEN / TUNA), tipo de animal, color de crema, nombre de la mascota, edad (entero)
+
+Muffin: color de crema, cantidad (mín 3 – máx 24)
+
+Mensaje de WhatsApp:
+Pedido #12
+
+• Torta Lassie
+  Cantidad: 1
+  Tipo: Torta
+  Mascota: Rocky 🐶
+  Edad: 5 años
+  Tamaño: Lassie (Double)
+  Sabor: Chicken
+  Crema: Beige
+  Precio unitario: $12000
+
+• Muffins
+  Cantidad: 6
+  Tipo: Muffin
+  Crema: Pink
+  Precio unitario: $800
+
+Total: $16800
+
+
+FALTA:
+
+- ESPECIFICAR QUE COLOR DE CINTA Y GLOBO (rosa ó azul) no esta en la bd
+
+Formularios
+UX (selectores, botones, validaciones visuales)

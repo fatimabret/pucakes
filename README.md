@@ -1,4 +1,4 @@
-Descripción del Proyecto
+# Descripción del Proyecto
 
 Este proyecto consiste en una aplicación web mobile-first desarrollada en Python con Django, orientada a la venta y armado personalizado de productos de pastelería canina y felina, como tortas, galletitas y muffins.
 
@@ -8,34 +8,34 @@ El proyecto no incluye pasarela de pagos, ya que el objetivo es facilitar el con
 
 Desde el punto de vista técnico, se utiliza Django como framework principal por su robustez, seguridad y panel de administración integrado, lo que permite gestionar productos y opciones sin necesidad de modificar el código. La aplicación está pensada para ser desplegada utilizando servicios gratuitos, garantizando un costo cero de infraestructura inicial.
 
-Características principales
+## Características principales
 
-Diseño mobile-first, optimizado para celulares
+- Diseño mobile-first, optimizado para celulares
 
-Catálogo de productos (tortas, galletitas y muffins)
+- Catálogo de productos (tortas, galletitas y muffins)
 
-Armado personalizado de pedidos
+- Armado personalizado de pedidos
 
-Generación automática de mensaje para WhatsApp
+- Generación automática de mensaje para WhatsApp
 
-Sin pagos online
+- Sin pagos online
 
-Panel de administración con Django Admin
+- Panel de administración con Django Admin
 
-Backend en Python
+- Backend en Python
 
-Base de datos liviana (SQLite)
+- Base de datos liviana (SQLite)
 
-Tecnologías utilizadas
+## Tecnologías utilizadas
 
-Python
+- Python
 
-Django
+- Django
 
-HTML5 / CSS3
+- HTML5 / CSS3
 
-Bootstrap 5
+- Bootstrap 5
 
-JavaScript
+- JavaScript
 
-WhatsApp Click to Chat
+- WhatsApp Click to Chat

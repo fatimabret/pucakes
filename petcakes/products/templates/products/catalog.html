@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo</title>
+</head>
+<body>
+
+<h1>Catálogo de productos</h1>
+
+<ul>
+    {% for product in products %}
+        <li>
+            <strong>{{ product.name }}</strong><br>
+            {{ product.description }}<br>
+            Precio: ${{ product.price }}
+        </li>
+    {% empty %}
+        <li>No hay productos disponibles</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

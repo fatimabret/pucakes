@@ -1,0 +1,74 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.main-content {
+  padding-top: 72px;
+}
+
+/* =====================
+   VARIABLES DE COLOR
+===================== */
+:root {
+
+    /* Base */
+  --white: #FFFFFF;
+  --primary-dark: #6C1B2F;
+  --primary-soft: #DAC6CB;
+  --primary-muted: #B68D97;
+  --primary-alt: #915463;
+
+    /* Énfasis */
+  --accent: #E58099;
+  --accent-light: #FFDBF7;
+
+    /* Texto */
+  --text-title: #6C1B2F;
+  --text-subtitle: #915463;
+  --text-body: #6C1B2F;
+  --text-link: #915463;
+
+    /* Fondos */
+  --bg-main: #FFFFFF;
+  --bg-secondary: #DAC6CB;
+
+    /* Separadores */
+  --divider: #E58099;
+}
+
+/* =====================
+   BASE
+===================== */
+body {
+  font-weight: 600;
+  background-color: var(--bg-main);
+  color: var(--text-body);
+  margin: 0;
+}
+
+/*  Tipografía por jerarquía   */
+h1, h2 {
+  color: var(--text-title);
+}
+
+h3, h4, h5 {
+  color: var(--text-subtitle);
+}
+
+p {
+  color: var(--text-body);
+}
+
+a {
+  color: var(--text-link);
+  text-decoration: none !important;
+}
+
+a:hover {
+  color: var(--primary-dark);
+  text-decoration: none !important;
+}

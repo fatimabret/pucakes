@@ -1,0 +1,78 @@
+/* ========================
+   ESTILOS DE BOTONES
+======================== */
+
+/* Regla general para quitar subrayado a TODOS los botones a la vez */
+.btn-primary,
+.btn-secondary,
+.btn-hero {
+  text-decoration: none !important; /* <--- EL SECRETO ESTÁ AQUÍ */
+  display: inline-block;
+}
+
+/* Botón principal (Rosa claro con borde oscuro) */
+.btn-primary {
+  background-color: var(--accent-light);
+  color: var(--primary-dark);
+  border: 2px solid var(--primary-dark);
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  color: var(--accent-light);
+  border-color: var(--accent-light);
+  text-decoration: none !important; /* Asegura que no aparezca al pasar el mouse */
+}
+
+
+/* Botón secundario (Oscuro con borde claro) */
+.btn-secondary {
+  background-color: var(--primary-dark);
+  color: var(--accent-light);
+  border: 2px solid var(--accent-light);
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--accent-light);
+  color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  text-decoration: none !important;
+}
+
+/* Botón transparente HERO (Portada) */
+.btn-hero {
+  padding: 0.75rem 1.8rem;
+  border: 2px solid #FFFFFF;
+  color: #FFFFFF;
+  background: transparent;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+}
+
+.btn-hero:hover {
+  background: #FFFFFF;
+  color: var(--primary-dark);
+  text-decoration: none !important;
+}
+
+/* Ajustes Responsive para Hero */
+@media (min-width: 768px) {
+  .hero-overlay h1 {
+    font-size: 3rem;
+  }
+
+  .hero-overlay p {
+    font-size: 1.4rem;
+  }
+}

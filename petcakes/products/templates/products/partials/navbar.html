@@ -1,0 +1,42 @@
+{% load static %}
+<nav class="navbar pucakes-navbar fixed-top">
+  <div class="container-fluid align-items-center">
+
+    <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'home' %}">
+      <img src="{% static 'products/img/logo.png' %}" alt="Pucakes logo" class="navbar-logo">
+      <span class="brand-text">Pucakes</span>
+    </a>
+
+    <a href="#" class="cart-icon ms-auto me-2">
+      <img src="{% static 'products/img/carrito.png' %}" alt="Carrito">
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#pucakesOffcanvas"
+      aria-controls="pucakesOffcanvas"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="pucakesOffcanvas" aria-labelledby="pucakesOffcanvasLabel">
+
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="pucakesOffcanvasLabel">Pucakes</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+      </div>
+
+      <div class="offcanvas-body">
+        <ul class="navbar-nav text-center gap-3">
+          <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Tendencias</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Promociones</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Más</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</nav>

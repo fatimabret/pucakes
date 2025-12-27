@@ -1,0 +1,40 @@
+{% load static %}
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section logo-section">
+                <a href="{% url 'home' %}"><img src="{% static 'products/img/mascota.png' %}" alt="Pucakes Logo" class="footer-logo">
+                <h3 class="footer-brand">Pucakes</h3></a>
+            </div>
+
+            <div class="footer-section contact-section">
+                <h3>Contacto</h3>
+                <p><i class="fas fa-phone-alt"></i> +54 9 379 508-8734</p>
+                <p><i class="fas fa-map-marker-alt"></i> Corrientes, Argentina</p>
+            </div>
+
+            <div class="footer-section links-section">
+                <ul>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Declaración de Accesibilidad</a></li>
+                    <li><a href="#">Términos y Condiciones</a></li>
+                    <li><a href="#">Política de Reembolso</a></li>
+                    <li><a href="#">Política de Envío</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section social-section">
+                <h3>Seguinos</h3>
+                <div class="social-icons">
+                    <a href="https://wa.me/5493795088734?text=Hola!%20Tengo%20una%20consulta%20..." target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/pucakess" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom text text-center">
+        <p>&copy; 2026 by Pucakes.</p>
+    </div>
+</footer>
