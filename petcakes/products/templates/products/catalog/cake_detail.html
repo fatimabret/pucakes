@@ -1,0 +1,112 @@
+{% extends "products/base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+
+                <div class="cake-detail">
+
+                    <div class="cake-image mb-4">
+                        <div class="main-img-container mb-3 text-center">
+                            {% if product.image %}
+                                <img id="mainImage" src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded shadow-sm" style="max-height: 400px; object-fit: cover;">
+                            {% else %}
+                                <img src="{% static 'products/img/logo.png' %}" class="img-fluid" alt="Sin imagen">
+                            {% endif %}
+                        </div>
+
+                        {% if product.images.all %}
+                        <div class="row g-2 justify-content-center">
+                            {% if product.image %}
+                            <div class="col-3">
+                                <img src="{{ product.image.url }}" 
+                                    onclick="changeImage(this.src)" 
+                                    class="img-thumbnail" 
+                                    style="cursor: pointer; height: 80px; width: 100%; object-fit: cover;">
+                            </div>
+                            {% endif %}
+
+                            {% for extra in product.images.all %}
+                            <div class="col-3">
+                                <img src="{{ extra.image.url }}" 
+                                    onclick="changeImage(this.src)" 
+                                    class="img-thumbnail" 
+                                    style="cursor: pointer; height: 80px; width: 100%; object-fit: cover;">
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="cake-info mt-4">
+                        <h1>{{ product.name }}</h1>
+                        
+                        <div class="d-inline-block p-2 rounded-0 mb-3" style="background-color: var(--primary-dark); color: white; font-size: 0.9rem; max-width: 100%;">
+                
+                            <i class="fas fa-ruler-horizontal me-2"></i>
+                            <span class="text-wrap">Medidas: {{ product.cake.dimensions }}</span>
+                        </div>
+                        
+                        <p class="text-muted">{{ product.description }}</p>
+                        <h3 class="fw-bold my-3 text-primary-dark">${{ product.price }}</h3>
+
+                        <form method="post" class="card p-4 border-0 shadow-sm bg-light rounded-0">
+                            {% csrf_token %}
+
+                            <div class="mb-3">
+                                <label class="fw-bold">Nombre de la mascota</label>
+                                <input type="text" name="pet_name" class="form-control" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="fw-bold">Edad</label>
+                                <input type="number" name="pet_age" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="fw-bold">Sabor</label>
+                                <select name="flavor" class="form-select">
+                                <option>Pollo</option>
+                                <option>Carne</option>
+                                <option>Pescado</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="fw-bold">Crema</label>
+                                <select name="cream_color" class="form-select">
+                                    <option>Azul</option>
+                                    <option>Rosa</option>
+                                    <option>Beige</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="fw-bold">Color de cinta y globo</label>
+                                <select name="decoration_color" class="form-select" required>
+                                <option value="ROSA">Rosa</option>
+                                <option value="AZUL">Azul</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100 rounded-0 py-2">
+                                Agregar al pedido 🐾
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div> </div> </div>
+
+    <script>
+    function changeImage(src) {
+        document.getElementById('mainImage').src = src;
+    }
+    </script>
+</section>
+{% endblock %}

@@ -17,6 +17,9 @@ class CreamColor(models.TextChoices):
     BLUE = 'BLUE', 'Blue'
     BEIGE = 'BEIGE', 'Beige'
 
+class DecorationColor(models.TextChoices):
+    PINK = 'PINK', 'Pink'
+    BLUE = 'BLUE', 'Blue'
 
 class CakeFlavor(models.TextChoices):
     # Sabores del bizcocho
@@ -33,19 +36,25 @@ class ProductStatus(models.TextChoices):
     ACTIVE = 'ACTIVE', 'Active'
     INACTIVE = 'INACTIVE', 'Inactive'
 
+class CookieShape(models.TextChoices):
+    HUELLA = 'HUELLA', 'Huella'
+    HUESO = 'HUESO', 'Hueso'
+
 
 # =====================================================
 # PRODUCT
 # Producto base reutilizable (tortas, muffins, cookies)
 # =====================================================
-
 class Product(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
-
-    price = models.DecimalField(
-        max_digits=8,
-        decimal_places=2
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+    
+    # Imagen de portada (thumbnail)
+    image = models.ImageField(
+        upload_to='products/', 
+        null=True, 
+        blank=True
     )
 
     status = models.CharField(
@@ -53,11 +62,31 @@ class Product(models.Model):
         choices=ProductStatus.choices,
         default=ProductStatus.ACTIVE
     )
-
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
+
+    @property
+    def category(self):
+        if hasattr(self, 'cake'):
+            return "Tortas"
+        elif hasattr(self, 'muffin'):
+            return "Muffins"
+        elif hasattr(self, 'cookie'):
+            return "Galletitas"
+        return "Otros"
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(
+        Product, 
+        related_name='images', 
+        on_delete=models.CASCADE
+    )
+    image = models.ImageField(upload_to='products_gallery/')
+
+    def __str__(self):
+        return f"Imagen extra de {self.product.name}"
 
 
 # =====================================================
@@ -92,11 +121,23 @@ class Cake(models.Model):
         choices=CreamColor.choices
     )
 
+    decoration_color = models.CharField(
+        max_length=5,
+        choices=DecorationColor.choices
+    )
+
     pet_name = models.CharField(max_length=50)
     pet_age = models.PositiveIntegerField()
 
-    def __str__(self):
-        return f"Cake - {self.product.name}"
+    @property
+    def dimensions(self):
+        if self.size == CakeSize.IMA:
+            return "10 cm de diámetro"
+        elif self.size == CakeSize.RUBI:
+            return "16 cm de diámetro"
+        elif self.size == CakeSize.LASSIE:
+            return "Dos pisos: Base 16 cm + Tope 10 cm"
+        return ""
 
 
 
@@ -125,6 +166,31 @@ class Muffin(models.Model):
     def __str__(self):
         return f"Muffin - {self.product.name}"
 
+
+# =====================================================
+# COOKIE
+# =====================================================
+
+class Cookie(models.Model):
+    product = models.OneToOneField(
+        Product,
+        on_delete=models.CASCADE
+    )
+
+    shape = models.CharField(
+        max_length=10,
+        choices=CookieShape.choices,
+        default=CookieShape.HUELLA
+    )
+
+    quantity = models.PositiveIntegerField(
+        default=6,
+        help_text="Minimo 6 – Maximo 24"
+    )
+
+    def __str__(self):
+        return f"Cookie - {self.product.name}"
+    
 
 # -------------------------
 # ORDER
@@ -156,49 +222,6 @@ class Order(models.Model):
     def total_price(self):
         return sum(item.subtotal for item in self.items.all())
     
-def whatsapp_message(self):
-    lines = []
-    lines.append(f"Pedido #{self.id}")
-    lines.append("")
-
-    for item in self.items.all():
-        product = item.product
-
-        lines.append(f"• {product.name}")
-        lines.append(f"  Cantidad: {item.quantity}")
-
-        # =====================
-        # CAKE
-        # =====================
-        if hasattr(product, 'cake'):
-            cake = product.cake
-
-            emoji = "🐶" if cake.animal_type == "DOG" else "🐱"
-
-            lines.append(f"  Mascota: {cake.pet_name} {emoji}")
-            lines.append(f"  Edad: {cake.pet_age} años")
-            lines.append(f"  Tamaño: {cake.get_size_display()}")
-            lines.append(f"  Sabor: {cake.get_flavor_display()}")
-            lines.append(f"  Crema: {cake.get_cream_color_display()}")
-
-        # =====================
-        # MUFFIN
-        # =====================
-        if hasattr(product, 'muffin'):
-            muffin = product.muffin
-            lines.append(f"  Crema: {muffin.get_cream_color_display()}")
-
-        lines.append(f"  Precio unitario: ${item.price}")
-        lines.append("")
-
-    lines.append(f"Total: ${self.total_price}")
-
-    return urllib.parse.quote("\n".join(lines))
-
-def whatsapp_url(self):
-    phone = self.phone_number.replace("+", "").replace(" ", "")
-    return f"https://wa.me/{phone}?text={self.whatsapp_message()}"
-
 
 # -------------------------
 # ORDER ITEM
@@ -219,8 +242,7 @@ class OrderItem(models.Model):
 
     quantity = models.PositiveIntegerField(
         validators=[
-            MinValueValidator(6),
-            MaxValueValidator(24)
+            MinValueValidator(1) # Permitimos 1 para Tortas
         ]
     )
 

@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from django.shortcuts import get_object_or_404, redirect
 from .models import Order
+from .models import Cake
 
-def confirm_order(request, order_id):
-    order = get_object_or_404(Order, id=order_id)
-    return redirect(order.whatsapp_url())
+def catalogo(request):
+    productos = Cake.objects.all()
+    return render(request, 'products/catalogo.html', {
+        'productos': productos
+    })

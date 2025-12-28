@@ -1,0 +1,83 @@
+{% extends "products/base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+
+    {% regroup products by category as category_list %}
+
+    <div class="category-nav text-center mb-5">
+        {% for category in category_list %}
+            <a href="#cat-{{ category.grouper }}" class="nav-link-custom">
+                {{ category.grouper }}
+            </a>
+        {% empty %}
+            <span class="text-muted">Catálogo</span>
+        {% endfor %}
+    </div>
+
+    <div class="text-center mb-5">
+      <h1>Nuestro Menú</h1>
+      <p class="text-muted">Delicias horneadas con amor</p>
+    </div>
+
+    {% for category in category_list %}
+        
+        <div id="cat-{{ category.grouper }}" class="category-section mb-5 pt-4"> 
+            
+            <h3 class="mb-4 text-primary-dark border-bottom pb-2" style="border-color: var(--primary-soft) !important;">
+                {{ category.grouper }}
+            </h3>
+
+            <div class="row g-4">
+                {% for producto in category.list %}
+                    <div class="col-12 col-md-6 col-lg-4">
+                        
+                        <div class="category-card h-100">
+                            <div class="card-img-wrapper">
+                                {% if producto.image %}
+                                    <img src="{{ producto.image.url }}" alt="{{ producto.name }}">
+                                {% else %}
+                                    <img src="{% static 'products/img/logo.png' %}" alt="Pucakes" style="padding: 20px; object-fit: contain;">
+                                {% endif %}
+                            </div>
+
+                            <div class="card-body mt-3 text-center d-flex flex-column">
+                                <h3 class="mb-2">{{ producto.name }}</h3>
+                                <p class="flex-grow-1 text-muted">{{ producto.description|truncatewords:10 }}</p>
+                                <h4 class="text-primary-dark fw-bold my-3">${{ producto.price }}</h4>
+
+                                <div class="mt-auto"> {% if producto.category == "Tortas" %}
+                                        <a href="{% url 'cake_detail' producto.id %}" class="btn-primary btn-sm rounded-0">
+                                            Personalizar Torta 🎂
+                                        </a>
+                                    
+                                    {% elif producto.category == "Muffins" %}
+                                        <a href="{% url 'muffin_detail' producto.id %}" class="btn-primary btn-sm rounded-0">
+                                            Elegir Muffins 🧁
+                                        </a>
+                                    
+                                    {% elif producto.category == "Galletitas" %}
+                                        <a href="{% url 'cookie_detail' producto.id %}" class="btn-primary btn-sm rounded-0">
+                                            Ver Galletitas 🍪
+                                        </a>
+                                    {% endif %}
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    {% empty %}
+        <div class="text-center py-5">
+            <h3>¡Pronto tendremos cosas ricas aquí!</h3>
+        </div>
+    {% endfor %}
+
+  </div>
+</section>
+{% endblock %}

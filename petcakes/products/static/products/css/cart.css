@@ -1,0 +1,29 @@
+/* Estilos del Carrito */
+.cart-item {
+    transition: background-color 0.2s;
+}
+
+.cart-item:hover {
+    background-color: #fcfcfc; /* Un cambio muy sutil al pasar el mouse */
+}
+
+.cart-img-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Cuadrado perfecto */
+    overflow: hidden;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Detalles pequeños */
+.item-details div {
+    margin-bottom: 2px;
+}

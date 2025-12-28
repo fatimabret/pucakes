@@ -7,7 +7,7 @@
       <span class="brand-text">Pucakes</span>
     </a>
 
-    <a href="#" class="cart-icon ms-auto me-2">
+    <a href="{% url 'ver_carrito' %}" class="cart-icon ms-auto me-2">
       <img src="{% static 'products/img/carrito.png' %}" alt="Carrito">
     </a>
 
@@ -30,7 +30,7 @@
 
       <div class="offcanvas-body">
         <ul class="navbar-nav text-center gap-3">
-          <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Inicio</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Tendencias</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Promociones</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Más</a></li>

@@ -61,7 +61,7 @@
 }
 
 .navbar-toggler-icon::before {
-  content: "\f0c9"; /* Código unicode para icono de menú si usas FontAwesome, o usa el símbolo "≡" */
+  content: "\f0c9";
   font-family: "Font Awesome 5 Free"; 
   font-weight: 900;
   font-size: 24px;

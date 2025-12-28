@@ -1,13 +1,17 @@
 from django.contrib import admin
 from .models import (
     Product,
+    ProductImage,
     Cake,
     Muffin,
+    Cookie,
     Order,
     OrderItem
 )
 
-
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 1
 #   list_display → qué columnas ves en la lista
 #   list_filter → filtros laterales
 #   search_fields → buscador
@@ -19,12 +23,18 @@ from .models import (
 
 #   Productos: Ves nombre, precio y estado.
 #   Podés activar/desactivar sin entrar. Filtro por estado.
+# =====================================================
+# PRODUCT ADMIN
+# =====================================================
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'status', 'created_at')
     list_filter = ('status',)
     search_fields = ('name',)
+    
+    # Aquí cargamos el bloque para subir múltiples fotos
+    inlines = [ProductImageInline]
 
 
 # =====================================================
@@ -57,6 +67,17 @@ class CakeAdmin(admin.ModelAdmin):
 class MuffinAdmin(admin.ModelAdmin):
     list_display = ('product', 'cream_color', 'quantity')
     list_filter = ('cream_color',)
+
+
+# =====================================================
+# COOKIE ADMIN
+# =====================================================
+
+#   Galletitas: Ves forma (huella o hueso) para identificar rápido y cantidad.
+@admin.register(Cookie)
+class CookieAdmin(admin.ModelAdmin):
+    list_display = ('product', 'shape')
+    list_filter = ('shape',)
 
 
 # -------------------------

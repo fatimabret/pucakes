@@ -1,0 +1,42 @@
+/* NAVEGACIÓN TIPO MENÚ RESTAURANTE */
+.category-nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Espacio entre palabras */
+    flex-wrap: wrap;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.nav-link-custom {
+    font-size: 1.2rem;
+    color: var(--text-subtitle); /* Color rosado oscuro/marrón */
+    text-decoration: none !important;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+/* Efecto de línea al pasar el mouse */
+.nav-link-custom::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-dark); /* Color guinda */
+    transition: width 0.3s ease;
+}
+
+.nav-link-custom:hover {
+    color: var(--primary-dark);
+}
+
+.nav-link-custom:hover::after {
+    width: 100%; /* La línea crece hasta cubrir la palabra */
+}
+
+/* Ajuste para que al hacer clic, el título no quede tapado por el menú fijo (scroll) */
+.category-section {
+    scroll-margin-top: 100px; 
+}

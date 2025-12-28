@@ -1,0 +1,70 @@
+{% extends "products/base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        
+        <div class="card-img-wrapper rounded-3 mb-4 shadow-sm">
+          {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid w-100 rounded-3">
+          {% else %}
+             <img src="{% static 'products/img/logo.png' %}" alt="Placeholder" class="img-fluid p-5">
+          {% endif %}
+        </div>
+
+        <h1 class="mb-2">{{ product.name }}</h1>
+        <p class="text-muted">{{ product.description }}</p>
+        <h3 class="fw-bold text-primary-dark my-3">${{ product.price }} <span class="fs-6 text-muted fw-normal">/ unidad</span></h3>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" class="card p-4 border-0 shadow-sm bg-light">
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Formita</label>
+            <select name="shape" class="form-select">
+              <option value="Huella 🐾">Huella 🐾</option>
+              <option value="Hueso 🦴">Hueso 🦴</option>
+            </select>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-bold">Cantidad (Mín 6 - Máx 24)</label>
+            <div class="input-group">
+                <button class="btn btn-outline-secondary" type="button" onclick="stepDown()">-</button>
+                
+                <input type="number" id="qtyInput" name="quantity" class="form-control text-center" value="6" min="6" max="24" readonly>
+                
+                <button class="btn btn-outline-secondary" type="button" onclick="stepUp()">+</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 py-2">
+            Sumar al carrito <i class="fas fa-cookie-bite ms-2"></i>
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function stepUp() {
+    let input = document.getElementById('qtyInput');
+    if (parseInt(input.value) < 24) input.value = parseInt(input.value) + 1;
+  }
+  function stepDown() {
+    let input = document.getElementById('qtyInput');
+    if (parseInt(input.value) > 6) input.value = parseInt(input.value) - 1;
+  }
+</script>
+{% endblock %}
