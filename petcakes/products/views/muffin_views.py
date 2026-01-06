@@ -6,8 +6,21 @@ def muffin_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
 
     if request.method == 'POST':
-        # 1. Capturamos los datos del formulario HTML
-        pack_size = request.POST.get('pack_size') 
+        # 1. Capturamos los datos
+        qty_str = request.POST.get('quantity', '6')
+        
+        # Evitamos errores si no mandan número
+        try:
+            quantity = int(qty_str)
+        except ValueError:
+            quantity = 6
+
+        # --- SEGURIDAD: FORZAR LÍMITES ---
+        if quantity < 6:
+            quantity = 6
+        elif quantity > 24:
+            quantity = 24
+        
         cream_color = request.POST.get('cream_color')
         
         # 2. Creamos el diccionario del producto
@@ -17,9 +30,9 @@ def muffin_detail(request, product_id):
             'price': float(product.price),
             'image': product.image.url if product.image else '',
             'type': 'Muffins',
-            'quantity': 1, 
+            'quantity': quantity,
             'details': {
-                'Tamaño': pack_size,
+                'Pack Seleccionado': f"x{quantity} unidades",
                 'Color de crema': cream_color
             }
         }

@@ -18,9 +18,9 @@ Product:
 	Información comercial común a todo: nombre, descripción, precio, estado (activo / inactivo)
 
 Cake:
-	Configuración específica de tortas: tamaño (IMA / RUBI / LASSIE), sabor (MEAT / CHICKEN / TUNA), tipo de animal, color de crema, nombre de la mascota, edad (entero)
+	Configuración específica de tortas: tamaño (IMA / RUBI / LASSIE), tipo de mascota (PERRO / GATO), sabor (MEAT / CHICKEN / TUNA), color de crema, nombre de la mascota, edad (entero)
 
-Muffin: color de crema, cantidad (mín 3 – máx 24)
+Muffin: color de crema, cantidad (mín 6 – máx 24)
 
 Mensaje de WhatsApp:
  ¡Hola Pucakes! Confirmar mi pedido #
@@ -42,4 +42,8 @@ Mensaje de WhatsApp:
 -----------------------------
   TOTAL A PAGAR: $
 
-Quedo a la espera para coordinar pago y entrega. 🐾
+Quedo a la espera para coordinar pago y entrega.
+
+
+FALTA:
+en el carrito quiero que vaya la cantidad por el precio de cada cosa o esta mal? porq sigue mostrando el precio unitario

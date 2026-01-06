@@ -16,15 +16,14 @@ def cart_context(request):
     cart = request.session.get('cart', [])
     total = 0
     
-    # Calculamos el total aquí para tenerlo disponible siempre
+    # Lógica Universal: Precio x Cantidad
     for item in cart:
-        if item.get('type') == 'Galletitas':
-            total += item['price'] * item['quantity']
-        else:
-            total += item['price'] # Tortas y Muffins (precio unitario o pack)
+        price = float(item['price'])
+        quantity = int(item.get('quantity', 1)) # Si no tiene cantidad (ej. tortas viejas), asume 1
+        total += price * quantity
             
     return {
         'cart': cart,
-        'cart_total': total,
+        'cart_total': total, # Ahora sí sumará bien los muffins
         'cart_count': len(cart)
     }

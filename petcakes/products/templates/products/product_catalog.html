@@ -71,7 +71,7 @@
                         <div class="card-body mt-3 text-center d-flex flex-column">
                             <h3 class="mb-2">{{ producto.name }}</h3>
                             <p class="flex-grow-1 text-muted">{{ producto.description|truncatewords:10 }}</p>
-                            <h4 class="text-primary-dark fw-bold my-3">${{ producto.price }}</h4>
+                            <h4 class="text-primary-dark fw-bold my-3">${{ producto.price }} <span class="fs-6 text-muted fw-normal" id="unitLabel">/ unidad</span></h4>
 
                             <div class="mt-auto">
                                 <a href="{% url 'muffin_detail' producto.id %}" class="btn-primary btn-sm rounded-0">
@@ -106,7 +106,7 @@
                         <div class="card-body mt-3 text-center d-flex flex-column">
                             <h3 class="mb-2">{{ producto.name }}</h3>
                             <p class="flex-grow-1 text-muted">{{ producto.description|truncatewords:10 }}</p>
-                            <h4 class="text-primary-dark fw-bold my-3">${{ producto.price }}</h4>
+                            <h4 class="text-primary-dark fw-bold my-3">${{ producto.price }} <span class="fs-6 text-muted fw-normal" id="unitLabel">/ unidad</span></h4>
 
                             <div class="mt-auto">
                                 <a href="{% url 'cookie_detail' producto.id %}" class="btn-primary btn-sm rounded-0">

@@ -1,3 +1,4 @@
+from decouple import config
 """
 Django settings for petcakes project.
 
@@ -20,14 +21,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ozrh#b696(g9+=61qwyh4&wsdszo14944g8h^)(voogn#3nnn)'
+# Ahora la leemos del archivo .env
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# config intenta leerlo como booleano (True/False)
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = []
 
-WHATSAPP_PHONE = "5493795088734"
+# Tu teléfono también lo protegemos
+WHATSAPP_PHONE = config('WHATSAPP_PHONE')
 
 # Application definition
 

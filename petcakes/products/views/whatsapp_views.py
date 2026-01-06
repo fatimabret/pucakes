@@ -91,6 +91,11 @@ def send_whatsapp(request):
     lines.append("-------------------------------------------------")
     lines.append(f"   *TOTAL A PAGAR: ${total_acumulado:,.0f}*")
     lines.append("")
+
+    senia = total_acumulado * 0.5  # Calculamos el 50%
+    lines.append(f"   *Seña mínima (50%): ${senia:,.0f}* _(Requerida para confirmar fecha)_")
+
+    lines.append("")
     lines.append("Quedo a la espera para coordinar pago y entrega. ¡Gracias!")
 
     # 1. Limpiar el carrito de la sesión

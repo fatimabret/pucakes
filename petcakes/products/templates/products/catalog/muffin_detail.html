@@ -47,29 +47,49 @@
 
                 <h1 class="mb-2">{{ product.name }}</h1>
                 <p class="text-muted">{{ product.description }}</p>
-                <h3 class="fw-bold text-primary-dark my-3">${{ product.price }}</h3>
+                <h3 class="fw-bold text-primary-dark my-3">
+                    $<span id="displayPrice">{{ product.price }}</span>
+                    <span class="fs-6 text-muted fw-normal" id="unitLabel"> (x 6 u.)</span>
+                </h3>
 
                 <form method="post" class="card p-4 border-0 shadow-sm bg-light rounded-0">
                     {% csrf_token %}
 
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Elegí el Pack</label>
-                        <select name="pack_size" class="form-select">
-                            <option value="Pack x6">Pack x6 unidades</option>
-                            <option value="Pack x12">Pack x12 unidades</option>
-                            <option value="Pack x24">Pack x24 unidades</option>
-                        </select>
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Cantidad de Muffins</label>
+                        <div class="d-flex align-items-center">
+                            
+                            <button type="button" class="btn btn-outline-secondary rounded-0" onclick="updateQuantity(-1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+
+                            <input type="number" 
+                                   id="quantityInput" 
+                                   name="quantity" 
+                                   class="form-control text-center mx-2 rounded-0" 
+                                   value="6" 
+                                   min="6" 
+                                   max="24" 
+                                   readonly 
+                                   style="max-width: 80px; font-weight: bold;">
+
+                            <button type="button" class="btn btn-outline-secondary rounded-0" onclick="updateQuantity(1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+
+                        </div>
+                        <small class="text-muted mt-1 d-block">
+                            * Mínimo 6 unidades - Máximo 24 unidades
+                        </small>
                     </div>
 
                     <div class="mb-4">
                         <label class="form-label fw-bold">Color de la Crema</label>
-                        <div class="d-flex gap-2">
-                            <select name="cream_color" class="form-select">
-                                <option value="Rosa">Rosa</option>
-                                <option value="Azul">Azul</option>
-                                <option value="Beige">Beige</option>
-                            </select>
-                        </div>
+                        <select name="cream_color" class="form-select rounded-0">
+                            <option value="Rosa">Rosa</option>
+                            <option value="Azul">Azul</option>
+                            <option value="Beige">Beige</option>
+                        </select>
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100 rounded-0 py-2">
@@ -80,11 +100,47 @@
             </div>
         </div>
     </div>
+</section>
 
-    <script>
+<script>
+    // 1. Guardamos el precio unitario que viene de Django (Ej: 1500.00)
+    // Usamos replace para cambiar la coma por punto si fuera necesario, aunque Django suele enviar punto en floats.
+    const unitPrice = parseFloat("{{ product.price|stringformat:'f' }}");
+
     function changeImage(src) {
         document.getElementById('mainImage').src = src;
     }
-    </script>
-</section>
+
+    function updateQuantity(change) {
+        const input = document.getElementById('quantityInput');
+        const priceSpan = document.getElementById('displayPrice');
+        const unitLabel = document.getElementById('unitLabel');
+        
+        let currentValue = parseInt(input.value);
+        let newValue = currentValue + change;
+
+        // Restricciones (Min 6 - Max 24)
+        if (newValue >= 6 && newValue <= 24) {
+            input.value = newValue;
+            
+            // --- MAGIA: ACTUALIZAR PRECIO VISUAL ---
+            const newTotal = newValue * unitPrice;
+            
+            // Actualizamos el texto del precio (sin decimales para que se vea limpio)
+            priceSpan.innerText = newTotal.toLocaleString('es-AR'); 
+            
+            // Actualizamos la etiqueta pequeña
+            unitLabel.innerText = ` (x ${newValue} u.)`;
+        }
+    }
+    
+    // Ejecutar una vez al inicio para asegurarse que el precio base (x6) esté bien calculado visualmente
+    document.addEventListener("DOMContentLoaded", function() {
+        // Simulamos un update de 0 para setear el precio inicial correcto (6 * precio unitario)
+        const input = document.getElementById('quantityInput');
+        // Si el input arranca en 6, multiplicamos 6 * unitPrice visualmente
+        const initialTotal = parseInt(input.value) * unitPrice;
+        document.getElementById('displayPrice').innerText = initialTotal.toLocaleString('es-AR');
+    });
+</script>
 {% endblock %}
