@@ -9,7 +9,7 @@ from products.views.muffin_views import muffin_detail
 from products.views.cookies_views import cookie_detail
 
 # IMPORTANTE: Importamos las vistas del carrito que creamos antes
-from products.views.cart_views import ver_carrito, vaciar_carrito
+from products.views.cart_views import ver_carrito, vaciar_carrito, remove_item
 from products.views.whatsapp_views import send_whatsapp
 
 urlpatterns = [
@@ -24,6 +24,7 @@ urlpatterns = [
     # Rutas del Carrito (Reemplazan al add_to_cart)
     path('mi-pedido/', ver_carrito, name='ver_carrito'),
     path('limpiar-pedido/', vaciar_carrito, name='vaciar_carrito'),
+    path('eliminar/<int:item_index>/', remove_item, name='remove_item'),
 
     path('confirm-order/', confirm_order, name='confirm_order'),
 

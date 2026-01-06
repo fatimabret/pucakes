@@ -1,0 +1,150 @@
+{% extends "products/base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+
+    <div class="category-nav text-center mb-5">
+        <a href="#cat-Tortas" class="nav-link-custom">Tortas</a>
+        <a href="#cat-Muffins" class="nav-link-custom">Muffins</a>
+        <a href="#cat-Galletitas" class="nav-link-custom">Galletitas</a>
+    </div>
+
+    <div class="text-center mb-5">
+      <h1>Nuestro Menú</h1>
+      <p class="text-muted">Delicias horneadas con amor</p>
+    </div>
+
+    {% if tortas %}
+    <div id="cat-Tortas" class="category-section mb-5 pt-4"> 
+        <h3 class="mb-4 text-primary-dark border-bottom pb-2" style="border-color: var(--primary-soft) !important;">
+            Tortas
+        </h3>
+        <div class="row g-4">
+            {% for producto in tortas %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="category-card h-100">
+                        <div class="card-img-wrapper">
+                            {% if producto.image %}
+                                <img src="{{ producto.image.url }}" alt="{{ producto.name }}">
+                            {% else %}
+                                <img src="{% static 'products/img/logo.png' %}" alt="Pucakes" style="padding: 20px; object-fit: contain;">
+                            {% endif %}
+                        </div>
+
+                        <div class="card-body mt-3 text-center d-flex flex-column">
+                            <h3 class="mb-2">{{ producto.name }}</h3>
+                            <p class="flex-grow-1 text-muted">{{ producto.description|truncatewords:10 }}</p>
+                            <h4 class="text-primary-dark fw-bold my-3">${{ producto.price }}</h4>
+
+                            <div class="mt-auto">
+                                <a href="{% url 'cake_detail' producto.id %}" class="btn-primary btn-sm rounded-0">
+                                    Personalizar Torta
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if muffins %}
+    <div id="cat-Muffins" class="category-section mb-5 pt-4"> 
+        <h3 class="mb-4 text-primary-dark border-bottom pb-2" style="border-color: var(--primary-soft) !important;">
+            Muffins
+        </h3>
+        <div class="row g-4">
+            {% for producto in muffins %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="category-card h-100">
+                        <div class="card-img-wrapper">
+                            {% if producto.image %}
+                                <img src="{{ producto.image.url }}" alt="{{ producto.name }}">
+                            {% else %}
+                                <img src="{% static 'products/img/logo.png' %}" alt="Pucakes" style="padding: 20px; object-fit: contain;">
+                            {% endif %}
+                        </div>
+
+                        <div class="card-body mt-3 text-center d-flex flex-column">
+                            <h3 class="mb-2">{{ producto.name }}</h3>
+                            <p class="flex-grow-1 text-muted">{{ producto.description|truncatewords:10 }}</p>
+                            <h4 class="text-primary-dark fw-bold my-3">${{ producto.price }}</h4>
+
+                            <div class="mt-auto">
+                                <a href="{% url 'muffin_detail' producto.id %}" class="btn-primary btn-sm rounded-0">
+                                    Elegir Muffins
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if galletitas %}
+    <div id="cat-Galletitas" class="category-section mb-5 pt-4"> 
+        <h3 class="mb-4 text-primary-dark border-bottom pb-2" style="border-color: var(--primary-soft) !important;">
+            Galletitas
+        </h3>
+        <div class="row g-4">
+            {% for producto in galletitas %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="category-card h-100">
+                        <div class="card-img-wrapper">
+                            {% if producto.image %}
+                                <img src="{{ producto.image.url }}" alt="{{ producto.name }}">
+                            {% else %}
+                                <img src="{% static 'products/img/logo.png' %}" alt="Pucakes" style="padding: 20px; object-fit: contain;">
+                            {% endif %}
+                        </div>
+
+                        <div class="card-body mt-3 text-center d-flex flex-column">
+                            <h3 class="mb-2">{{ producto.name }}</h3>
+                            <p class="flex-grow-1 text-muted">{{ producto.description|truncatewords:10 }}</p>
+                            <h4 class="text-primary-dark fw-bold my-3">${{ producto.price }}</h4>
+
+                            <div class="mt-auto">
+                                <a href="{% url 'cookie_detail' producto.id %}" class="btn-primary btn-sm rounded-0">
+                                    Ver Galletitas
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    
+    {% if otros %}
+    <div id="cat-Otros" class="category-section mb-5 pt-4"> 
+        <h3 class="mb-4 text-danger border-bottom pb-2">Sin Clasificar</h3>
+        <div class="row g-4">
+            {% for producto in otros %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="category-card h-100 border-danger">
+                        <div class="card-img-wrapper">
+                            <img src="{% static 'products/img/logo.png' %}" alt="Placeholder">
+                        </div>
+                        <div class="card-body mt-3 text-center">
+                            <h3 class="mb-2">{{ producto.name }}</h3>
+                            <h4 class="text-primary-dark fw-bold my-3">${{ producto.price }}</h4>
+                            <div class="mt-auto">
+                                <span class="btn btn-secondary btn-sm disabled">No disponible</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+{% endblock %}

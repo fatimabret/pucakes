@@ -76,3 +76,15 @@
     font-size: 1.4rem;
   }
 }
+
+/* =========================================
+   REGLA GLOBAL: BOTONES CUADRADOS
+   (Para que aplique en Catálogo, Carrito, etc.)
+   ========================================= */
+button,
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-hero {
+  border-radius: 0 !important;
+}

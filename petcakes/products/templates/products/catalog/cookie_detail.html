@@ -7,12 +7,42 @@
     <div class="row justify-content-center">
       <div class="col-12 col-md-8 col-lg-6">
         
-        <div class="card-img-wrapper rounded-3 mb-4 shadow-sm">
-          {% if product.image %}
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid w-100 rounded-3">
-          {% else %}
-             <img src="{% static 'products/img/logo.png' %}" alt="Placeholder" class="img-fluid p-5">
-          {% endif %}
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'catalogo' %}" class="text-decoration-none text-muted">Catálogo</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'catalogo' %}#cat-Galletitas" class="text-decoration-none fw-bold text-primary-dark">Galletitas</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+            </ol>
+        </nav>
+        
+        <div class="mb-4">
+            <div class="main-img-container mb-3 text-center">
+                {% if product.image %}
+                <img id="mainImage" src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded shadow-sm" style="max-height: 400px; object-fit: cover;">
+                {% else %}
+                <img src="{% static 'products/img/logo.png' %}" class="img-fluid" alt="Sin imagen">
+                {% endif %}
+            </div>
+
+            {% if product.images.all %}
+            <div class="row g-2 justify-content-center">
+                {% if product.image %}
+                <div class="col-3">
+                    <img src="{{ product.image.url }}" onclick="changeImage(this.src)" class="img-thumbnail" style="cursor: pointer; height: 80px; width: 100%; object-fit: cover;">
+                </div>
+                {% endif %}
+                
+                {% for extra in product.images.all %}
+                <div class="col-3">
+                    <img src="{{ extra.image.url }}" onclick="changeImage(this.src)" class="img-thumbnail" style="cursor: pointer; height: 80px; width: 100%; object-fit: cover;">
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
         </div>
 
         <h1 class="mb-2">{{ product.name }}</h1>
@@ -39,16 +69,16 @@
           <div class="mb-4">
             <label class="form-label fw-bold">Cantidad (Mín 6 - Máx 24)</label>
             <div class="input-group">
-                <button class="btn btn-outline-secondary" type="button" onclick="stepDown()">-</button>
+                <button class="btn btn-outline-secondary" type="button" id="btnMinus">-</button>
                 
-                <input type="number" id="qtyInput" name="quantity" class="form-control text-center" value="6" min="6" max="24" readonly>
+                <input type="number" id="qtyInput" name="quantity" class="form-control text-center" value="6" min="6" max="24">
                 
-                <button class="btn btn-outline-secondary" type="button" onclick="stepUp()">+</button>
+                <button class="btn btn-outline-secondary" type="button" id="btnPlus">+</button>
             </div>
           </div>
 
           <button type="submit" class="btn btn-primary w-100 py-2">
-            Sumar al carrito <i class="fas fa-cookie-bite ms-2"></i>
+            Agregar al pedido
           </button>
         </form>
 
@@ -58,13 +88,43 @@
 </section>
 
 <script>
-  function stepUp() {
-    let input = document.getElementById('qtyInput');
-    if (parseInt(input.value) < 24) input.value = parseInt(input.value) + 1;
+  // 1. Lógica para cambiar imagen principal
+  function changeImage(src) {
+      const mainImg = document.getElementById('mainImage');
+      if(mainImg) mainImg.src = src;
   }
-  function stepDown() {
-    let input = document.getElementById('qtyInput');
-    if (parseInt(input.value) > 6) input.value = parseInt(input.value) - 1;
-  }
+
+  // 2. Lógica robusta para el contador (+ / -)
+  document.addEventListener("DOMContentLoaded", function() {
+      const input = document.getElementById('qtyInput');
+      const btnPlus = document.getElementById('btnPlus');
+      const btnMinus = document.getElementById('btnMinus');
+      const MIN = 6;
+      const MAX = 24;
+
+      // Botón Sumar
+      btnPlus.addEventListener('click', function() {
+          let currentVal = parseInt(input.value) || 0;
+          if (currentVal < MAX) {
+              input.value = currentVal + 1;
+          }
+      });
+
+      // Botón Restar
+      btnMinus.addEventListener('click', function() {
+          let currentVal = parseInt(input.value) || 0;
+          if (currentVal > MIN) {
+              input.value = currentVal - 1;
+          }
+      });
+
+      // Validación manual: Si escriben un número, verificamos que no se pase al salir del campo
+      input.addEventListener('blur', function() {
+          let val = parseInt(this.value);
+          if (val < MIN) this.value = MIN;
+          if (val > MAX) this.value = MAX;
+          if (!val) this.value = MIN; // Si borran todo, vuelve al mínimo
+      });
+  });
 </script>
 {% endblock %}

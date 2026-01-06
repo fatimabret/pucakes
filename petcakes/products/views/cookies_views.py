@@ -40,7 +40,10 @@ def cookie_detail(request, product_id):
         cart.append(cart_item)
         request.session['cart'] = cart
         
-        messages.success(request, '¡Galletitas agregadas!')
-        return redirect('ver_carrito')
+        # Enviamos la señal para abrir el sidebar
+        messages.success(request, 'abrir_carrito')
+        
+        # Redirigimos al catálogo en lugar de la página de carrito
+        return redirect('catalogo') 
 
     return render(request, 'products/catalog/cookie_detail.html', {'product': product})

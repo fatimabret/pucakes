@@ -1,0 +1,41 @@
+{% load static %}
+
+<div class="category-card h-100 shadow-sm border-0">
+    
+    <div class="card-img-wrapper" style="height: 250px; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: #f8f9fa;">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: cover;">
+        {% else %}
+            <img src="{% static 'products/img/logo.png' %}" alt="Pucakes" style="width: 60%; opacity: 0.5;">
+        {% endif %}
+    </div>
+
+    <div class="card-body mt-3 text-center d-flex flex-column p-3">
+        <h4 class="mb-2 fw-bold text-dark">{{ product.name }}</h4>
+        
+        <p class="flex-grow-1 text-muted small">{{ product.description|truncatewords:10 }}</p>
+        
+        <h4 class="text-primary-dark fw-bold my-3">${{ product.price }}</h4>
+
+        <div class="mt-auto">
+            {% if product.cake %}
+                <a href="{% url 'cake_detail' product.id %}" class="btn btn-primary w-100 rounded-0">
+                    Personalizar Torta <i class="fas fa-birthday-cake ms-2"></i>
+                </a>
+            
+            {% elif product.muffin %}
+                <a href="{% url 'muffin_detail' product.id %}" class="btn btn-primary w-100 rounded-0">
+                    Elegir Pack <i class="fas fa-cookie ms-2"></i>
+                </a>
+            
+            {% elif product.cookie %}
+                <a href="{% url 'cookie_detail' product.id %}" class="btn btn-primary w-100 rounded-0">
+                    Ver Galletitas <i class="fas fa-paw ms-2"></i>
+                </a>
+            
+            {% else %}
+                <button class="btn btn-secondary w-100 disabled">No disponible</button>
+            {% endif %}
+        </div>
+    </div>
+</div>

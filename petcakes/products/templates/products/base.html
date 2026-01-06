@@ -30,7 +30,9 @@
 <body>
 
   {% include 'products/partials/navbar.html' %}
-
+  
+  {% include 'products/partials/cart_sidebar.html' %}
+  
   <main class="main-content">
     {% block content %}{% endblock %}
   </main>
@@ -40,5 +42,22 @@
     <!-- Bootstrap JS  -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="{% static 'products/js/navbar.js' %}"></script>
+  {% if messages %}
+  
+      {% for message in messages %}
+          {% if message.message == 'abrir_carrito' %}
+              <script>
+                  document.addEventListener("DOMContentLoaded", function(){
+                      // Buscamos el sidebar por su ID
+                      var myOffcanvas = document.getElementById('cartSidebar');
+                      // Lo inicializamos y lo mostramos
+                      var bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
+                      bsOffcanvas.show();
+                  });
+              </script>
+          {% endif %}
+      {% endfor %}
+  {% endif %}
+
 </body>
 </html>

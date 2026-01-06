@@ -72,3 +72,54 @@ a:hover {
   color: var(--primary-dark);
   text-decoration: none !important;
 }
+
+/* =========================================
+   UTILIDADES DE COLOR (AGREGAR AL FINAL DE BASE.CSS)
+   ========================================= */
+
+/* Para textos color Guinda (Títulos, precios, nombres) */
+.text-primary-dark {
+  color: var(--primary-dark) !important;
+}
+
+/* Para textos color Rosa Viejo (subtítulos) */
+.text-subtitle {
+  color: var(--text-subtitle) !important;
+}
+
+/* Para fondos color Guinda (ej: badges) */
+.bg-primary-dark {
+  background-color: var(--primary-dark) !important;
+  color: var(--white) !important;
+}
+
+/* Fuerza el texto blanco cuando sea necesario */
+.text-white {
+  color: #FFFFFF !important;
+}
+
+/* Opcional: Estiliza la barra de scroll del carrito para que combine */
+.overflow-auto::-webkit-scrollbar {
+    width: 6px;
+}
+.overflow-auto::-webkit-scrollbar-thumb {
+    background-color: var(--primary-muted);
+    border-radius: 4px;
+}
+
+/* =========================================
+   OCULTAR FLECHAS NATIVAS EN INPUT NUMBER
+   ========================================= */
+
+/* Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield; /* Para versiones actuales de Firefox */
+  appearance: textfield;      /* Estándar moderno (elimina la advertencia) */
+}

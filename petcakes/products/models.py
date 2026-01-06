@@ -258,3 +258,13 @@ class OrderItem(models.Model):
     def subtotal(self):
         return self.quantity * self.price
 
+class BlockedDate(models.Model):
+    date = models.DateField(unique=True, verbose_name="Fecha Bloqueada")
+    reason = models.CharField(max_length=100, blank=True, verbose_name="Motivo (Opcional)")
+
+    def __str__(self):
+        return f"{self.date} - {self.reason}"
+    
+    class Meta:
+        verbose_name = "Fecha Bloqueada"
+        verbose_name_plural = "Fechas Bloqueadas (Vacaciones/Feriados)"

@@ -1,27 +1,30 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
+from django.contrib import messages
 
 def ver_carrito(request):
-    # Recuperamos el carrito de la sesión. Si no existe, devuelve una lista vacía.
-    cart = request.session.get('cart', [])
-    
-    # Calculamos el total
-    total = 0
-    for item in cart:
-        # Si tienes lógica de precio por cantidad (como cookies), ajusta aquí
-        if item.get('type') == 'Galletitas':
-            total += item['price'] * item['quantity']
-        else:
-            # Para tortas y muffins el precio suele ser por unidad/pack
-            total += item['price'] 
-
-    return render(request, 'products/cart_detail.html', {
-        'cart': cart,
-        'total': total
-    })
+    # Como usamos el Sidebar Lateral, no hay página exclusiva de carrito.
+    # Si alguien intenta entrar aquí, lo mandamos al catálogo.
+    return redirect('catalogo')
 
 def vaciar_carrito(request):
+    # Borramos el carrito de la sesión
     if 'cart' in request.session:
         del request.session['cart']
     
-    # Redirige al catálogo para empezar de nuevo
+    # Volvemos al catálogo (el carrito aparecerá vacío)
+    return redirect('catalogo')
+
+# Borrar un solo ítem por su posición (índice)
+def remove_item(request, item_index):
+    cart = request.session.get('cart', [])
+    
+    # Verificamos que el índice exista para no dar error
+    if 0 <= item_index < len(cart):
+        del cart[item_index] # Borramos el ítem
+        request.session['cart'] = cart # Guardamos
+        request.session.modified = True 
+    
+    # Enviamos la señal para que el carrito se abra solo
+    messages.success(request, 'abrir_carrito')
+    
     return redirect('catalogo')

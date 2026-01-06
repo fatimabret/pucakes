@@ -9,6 +9,17 @@
             <div class="col-12 col-md-8 col-lg-6">
 
                 <div class="cake-detail">
+                    <nav aria-label="breadcrumb" class="mb-3">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'catalogo' %}" class="text-decoration-none text-muted">Catálogo</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'catalogo' %}#cat-Tortas" class="text-decoration-none fw-bold text-primary-dark">Tortas</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+                        </ol>
+                    </nav>
 
                     <div class="cake-image mb-4">
                         <div class="main-img-container mb-3 text-center">
@@ -59,12 +70,33 @@
 
                             <div class="mb-3">
                                 <label class="fw-bold">Nombre de la mascota</label>
-                                <input type="text" name="pet_name" class="form-control" required>
+                                <input type="text" 
+                                    name="pet_name" 
+                                    class="form-control" 
+                                    required 
+                                    pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+" 
+                                    title="Solo se permiten letras y espacios (sin números)"
+                                    placeholder="Ej: Firulais">
                             </div>
 
                             <div class="mb-3">
                                 <label class="fw-bold">Edad</label>
-                                <input type="number" name="pet_age" class="form-control">
+                                <input type="number" 
+                                    name="pet_age" 
+                                    class="form-control" 
+                                    required 
+                                    min="1" 
+                                    step="1"
+                                    oninput="validity.valid||(value='');" 
+                                    placeholder="Ej: 3">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="fw-bold">¿Es para Perro o Gato?</label>
+                                <select name="animal_type" class="form-select">
+                                    <option value="Perro">Perro</option>
+                                    <option value="Gato">Gato</option>
+                                </select>
                             </div>
 
                             <div class="mb-3">
@@ -94,7 +126,7 @@
                             </div>
 
                             <button type="submit" class="btn btn-primary w-100 rounded-0 py-2">
-                                Agregar al pedido 🐾
+                                Agregar al pedido
                             </button>
 
                         </form>

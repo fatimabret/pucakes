@@ -1,0 +1,161 @@
+{% load static %}
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
+  
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title fw-bold text-primary-dark" id="cartSidebarLabel">
+        <i class="fas fa-shopping-basket me-2"></i> Tu Pedido
+    </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+
+  <div class="offcanvas-body d-flex flex-column">
+    
+    {% if cart %}
+        <div class="flex-grow-1 overflow-auto pe-2">
+            {% for item in cart %}
+            <div class="card border-0 shadow-sm mb-3">
+                <div class="row g-0 align-items-center p-2">
+                    
+                    <div class="col-3">
+                        <div class="rounded overflow-hidden" style="width: 100%; aspect-ratio: 1/1;">
+                            {% if item.image %}
+                                <img src="{{ item.image }}" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="{{ item.name }}">
+                            {% else %}
+                                <img src="{% static 'products/img/logo.png' %}" class="img-fluid w-100 h-100" style="object-fit: contain;" alt="Placeholder">
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="col-9 ps-3">
+                        
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h6 class="mb-0 fw-bold text-primary-dark text-truncate" style="max-width: 85%;">{{ item.name }}</h6>
+                            
+                            <a href="{% url 'remove_item' forloop.counter0 %}" class="text-danger ms-1" style="font-size: 0.9rem; cursor: pointer;" title="Eliminar producto">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+
+                        <small class="d-block text-subtitle" style="font-size: 0.85rem;">{{ item.type }}</small>
+                        
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            {% if item.quantity > 1 %}
+                                <span class="badge bg-primary-dark rounded-0">x{{ item.quantity }}</span>
+                            {% else %}
+                                <span></span>
+                            {% endif %}
+                            
+                            <span class="fw-bold text-primary-dark fs-5">${{ item.price }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="mt-auto border-top pt-3">
+            <div class="d-flex justify-content-between mb-3 align-items-center">
+                <h4 class="fw-bold text-primary-dark m-0">Total:</h4>
+                <h3 class="fw-bold text-primary-dark m-0">${{ cart_total }}</h3>
+            </div>
+
+            <div class="d-grid gap-2">
+                <form action="{% url 'send_whatsapp' %}" method="POST" id="whatsappForm">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-primary-dark">
+                            <i class="far fa-calendar-alt me-1"></i> Fecha de Entrega
+                            <small class="d-block text-muted fw-normal" style="font-size: 0.8rem;">
+                                * Mínimo 48hs de anticipación
+                            </small>
+                        </label>
+                        
+                        <input type="date" 
+                               name="delivery_date" 
+                               id="dateInput" 
+                               class="form-control" 
+                               required>
+                        
+                        <div id="dateError" class="text-danger small mt-1" style="display:none;">
+                            Fecha no disponible.
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 rounded-0 py-2">
+                        Confirmar por WhatsApp <i class="fab fa-whatsapp ms-1"></i>
+                    </button>
+                </form>
+                
+                <a href="{% url 'vaciar_carrito' %}" class="btn btn-secondary btn-sm rounded-0">
+                    Vaciar carrito
+                </a>
+            </div>
+        </div>
+
+    {% else %}
+        <div class="text-center my-auto opacity-75">
+            <i class="fas fa-cookie-bite fa-4x mb-3 text-primary-dark"></i>
+            <h4 class="text-primary-dark fw-bold">¡Está vacío!</h4>
+            <p class="text-subtitle">Agregá algo rico para tu mascota.</p>
+            
+            <a href="{% url 'catalogo' %}" class="btn btn-primary rounded-0 mt-3">
+                Ir al Catálogo
+            </a>
+        </div>
+    {% endif %}
+
+  </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const dateInput = document.getElementById('dateInput');
+        const form = document.getElementById('whatsappForm');
+        const errorDiv = document.getElementById('dateError');
+        
+        // 1. Obtener fechas bloqueadas desde Django (gracias al context processor)
+        // 'safe' es necesario para que JS lea el JSON correctamente
+        const blockedDates = {{ blocked_dates_json|safe }};
+
+        // 2. Calcular fecha mínima (Hoy + 2 días)
+        const today = new Date();
+        const minDate = new Date(today);
+        minDate.setDate(today.getDate() + 2); // Sumamos 48hs (2 días)
+        
+        // Formato YYYY-MM-DD para el input
+        const minDateString = minDate.toISOString().split('T')[0];
+        dateInput.min = minDateString;
+
+        // 3. Validar cuando el usuario cambia la fecha
+        dateInput.addEventListener('change', function() {
+            const selectedDate = this.value;
+            
+            // A. Chequear si es día bloqueado por Admin
+            if (blockedDates.includes(selectedDate)) {
+                errorDiv.textContent = "Lo sentimos, esta fecha no está disponible.";
+                errorDiv.style.display = "block";
+                this.value = ""; // Borrar selección
+                return;
+            }
+
+            // B. Chequear si es fin de semana (Opcional - Si no trabajas domingos)
+            const dateObj = new Date(selectedDate + 'T00:00:00'); // T00... evita problemas de zona horaria
+            const dayOfWeek = dateObj.getDay(); // 0 = Domingo, 6 = Sábado
+            
+            // Si quieres bloquear Domingos, descomenta esto:
+            /*
+            if (dayOfWeek === 0) {
+                 errorDiv.textContent = "No realizamos entregas los domingos.";
+                 errorDiv.style.display = "block";
+                 this.value = "";
+                 return;
+            }
+            */
+
+            // Si pasa todo, ocultar error
+            errorDiv.style.display = "none";
+        });
+    });
+</script>

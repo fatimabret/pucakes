@@ -1,7 +1,10 @@
 cambio algo en el models: python manage.py makemigrations
 python manage.py migrate
 
-levantar el servidor: python manage.py runserver
+levantar el servidor: 
+cd C:\pucakes\petcakes
+
+python manage.py runserver
 
 
 admin: fatima
@@ -20,28 +23,23 @@ Cake:
 Muffin: color de crema, cantidad (mín 3 – máx 24)
 
 Mensaje de WhatsApp:
-Pedido #12
+ ¡Hola Pucakes! Confirmar mi pedido #
+ Torta Rubí
+    Detalles:
+ • Mascota: Firulais
+ • Edad: 3
+ • Tipo: Perro
+ • Sabor: Pollo
+ • Cobertura: Rosa
+    Medida: 10cm diámetro
+  Subtotal: $
 
-• Torta Lassie
-  Cantidad: 1
-  Tipo: Torta
-  Mascota: Rocky 🐶
-  Edad: 5 años
-  Tamaño: Lassie (Double)
-  Sabor: Chicken
-  Crema: Beige
-  Precio unitario: $12000
+   Muffins (x2 unidades)
+   Detalles:
+ • Pack: x6 unidades
+  Subtotal: $
 
-• Muffins
-  Cantidad: 6
-  Tipo: Muffin
-  Crema: Pink
-  Precio unitario: $800
+-----------------------------
+  TOTAL A PAGAR: $
 
-Total: $16800
-
-
-FALTA:
-
-Formularios
-UX (selectores, botones, validaciones visuales)
+Quedo a la espera para coordinar pago y entrega. 🐾

@@ -7,6 +7,18 @@
         <div class="row justify-content-center"> 
             <div class="col-12 col-md-8 col-lg-6">
         
+                <nav aria-label="breadcrumb" class="mb-3">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'catalogo' %}" class="text-decoration-none text-muted">Catálogo</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'catalogo' %}#cat-Muffins" class="text-decoration-none fw-bold text-primary-dark">Muffins</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+                    </ol>
+                </nav>
+                
                 <div class="mb-4">
                     <div class="main-img-container mb-3 text-center">
                         {% if product.image %}
@@ -61,7 +73,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100 rounded-0 py-2">
-                        Sumar al carrito 🧁
+                        Agregar al pedido
                     </button>
                 </form>
 
