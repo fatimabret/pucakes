@@ -42,6 +42,8 @@ Mensaje de WhatsApp:
 -----------------------------
   TOTAL A PAGAR: $
 
+Seña mínima (50%): $ (Requerida para confirmar fecha)
+
 Quedo a la espera para coordinar pago y entrega.
 
 
