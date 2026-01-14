@@ -48,4 +48,3 @@ Quedo a la espera para coordinar pago y entrega.
 
 
 FALTA:
-en el carrito quiero que vaya la cantidad por el precio de cada cosa o esta mal? porq sigue mostrando el precio unitario

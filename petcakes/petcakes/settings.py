@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 # config intenta leerlo como booleano (True/False)
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['pucakes.pythonanywhere.com', 'localhost', '127.0.0.1']
 
 # Tu teléfono también lo protegemos
 WHATSAPP_PHONE = config('WHATSAPP_PHONE')
@@ -125,6 +125,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 import os
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # URL base para acceder a los archivos en el navegador
 MEDIA_URL = '/media/'

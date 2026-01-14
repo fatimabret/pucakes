@@ -15,15 +15,28 @@ def blocked_dates(request):
 def cart_context(request):
     cart = request.session.get('cart', [])
     total = 0
+    updated_cart = []
     
     # Lógica Universal: Precio x Cantidad
     for item in cart:
         price = float(item['price'])
         quantity = int(item.get('quantity', 1)) # Si no tiene cantidad (ej. tortas viejas), asume 1
-        total += price * quantity
+        
+        # --- NUEVO: Calculamos el subtotal aquí mismo ---
+        subtotal = price * quantity
+        
+        # Agregamos este dato al ítem para poder usarlo en el HTML
+        # (Creamos una copia para no modificar la sesión original permanentemente si no queremos)
+        item_with_subtotal = item.copy()
+        item_with_subtotal['subtotal'] = subtotal
+        
+        updated_cart.append(item_with_subtotal)
+        
+        # Sumamos al total general
+        total += subtotal
             
     return {
-        'cart': cart,
-        'cart_total': total, # Ahora sí sumará bien los muffins
+        'cart': updated_cart, # Enviamos la lista nueva con los subtotales
+        'cart_total': total, 
         'cart_count': len(cart)
     }
