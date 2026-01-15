@@ -1,25 +1,46 @@
 {% extends "products/base.html" %}
 
 {% block content %}
-<div class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-8">
-            <div class="card shadow-sm border-0">
-                <div class="card-body p-5">
-                    <h1 class="mb-4 text-primary-dark border-bottom pb-3">{{ data.title }}</h1>
-                    
-                    <p class="lead" style="line-height: 1.8; color: #555;">
-                        {{ data.text }}
-                    </p>
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                
+                <div class="text-center mb-5">
+                    <h1 class="text-primary-dark">Políticas de Pucakes</h1>
+                    <p class="text-muted">Todo lo que necesitas saber para comprar con tranquilidad.</p>
+                </div>
 
-                    <div class="mt-5">
-                        <a href="{% url 'home' %}" class="btn btn-outline-secondary btn-sm">
-                            <i class="fas fa-arrow-left me-2"></i> Volver al Inicio
-                        </a>
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4 p-md-5">
+                        
+                        {% for key, policy in policies.items %}
+                            <div class="mb-5 policy-item">
+                                <h3 class="text-primary-dark fw-bold mb-3">
+                                    <i class="fas fa-paw me-2" style="font-size: 1rem; opacity: 0.5;"></i>
+                                    {{ policy.title }}
+                                </h3>
+                                <p class="lead fs-6 text-muted" style="line-height: 1.8; text-align: justify;">
+                                    {{ policy.text }}
+                                </p>
+                            </div>
+                            
+                            {% if not forloop.last %}
+                                <hr class="my-4" style="opacity: 0.1;">
+                            {% endif %}
+                        {% endfor %}
+
+                        <div class="mt-5 text-center">
+                            <a href="{% url 'home' %}" class="btn btn-outline-secondary rounded-0">
+                                <i class="fas fa-arrow-left me-2"></i> Volver al Inicio
+                            </a>
+                        </div>
+
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
-</div>
+</section>
 {% endblock %}

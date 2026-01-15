@@ -1,5 +1,5 @@
 from django.urls import path
-from products.views.home_views import home, legal_page
+from products.views.home_views import home, politicas_view
 from products.views.catalog_views import product_catalog
 from products.views.order_views import confirm_order
 
@@ -16,7 +16,7 @@ from django.views.defaults import page_not_found
 
 urlpatterns = [
     path('', home, name='home'),
-    path('legales/<str:tipo>/', legal_page, name='legal'),
+    path('politicas/', politicas_view, name='politicas'),
 
     path('catalogo/', product_catalog, name='catalogo'),
     

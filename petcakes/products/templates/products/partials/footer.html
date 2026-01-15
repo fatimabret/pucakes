@@ -2,43 +2,33 @@
 
 <footer class="site-footer">
     <div class="container">
-        <div class="footer-content">
-            <div class="footer-section logo-section">
-                <a href="{% url 'home' %}"><img src="{% static 'products/img/mascota.png' %}" alt="Pucakes Logo" class="footer-logo">
-                <h3 class="footer-brand">Pucakes</h3></a>
-            </div>
-
-            <div class="footer-section contact-section">
+        <div class="row align-items-center gy-4">
+            
+            <div class="col-12 col-md-4 text-center text-md-start">
                 <h3>Contacto</h3>
                 <p><i class="fas fa-phone-alt"></i> +54 9 379 508-8734</p>
                 <p><i class="fas fa-map-marker-alt"></i> Corrientes, Argentina</p>
             </div>
 
-            <div class="footer-section links-section">
-                <ul>
-                    <li><a href="{% url 'legal' 'privacidad' %}">Política de Privacidad</a></li>
-                    <li><a href="{% url 'legal' 'terminos' %}">Términos y Condiciones</a></li>
-                    <li><a href="{% url 'legal' 'reembolso' %}">Política de Reembolso</a></li>
-                    <li><a href="{% url 'legal' 'envio' %}">Política de Envío</a></li>
-                </ul>
+            <div class="col-12 col-md-4 text-center">
+                <a href="{% url 'home' %}"><img src="{% static 'products/img/mascota.png' %}" alt="Pucakes Logo" class="footer-logo"></a>
             </div>
 
-            <div class="footer-section social-section">
+            <div class="col-12 col-md-4 text-center text-md-end">
                 <h3>Seguinos</h3>
-                <div class="social-icons">
+                <div class="d-flex justify-content-center justify-content-md-end gap-3 ">
                     <a href="https://wa.me/5493795088734?text=Hola!%20Tengo%20una%20consulta%20..." target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     <a href="https://instagram.com/pucakess" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
+                
                 <li class="mt-3" style="list-style: none;">
                     <a href="{% url 'admin:index' %}" target="_blank" class="text-decoration-none" style="font-size: 0.9rem; opacity: 0.8;">
-                        <i class="fas fa-user-shield me-2"></i> Acceso Admin
+                        <i class="fas fa-user-shield me-2"></i>
                     </a>
                 </li>
             </div>
         </div>
     </div>
-
-    <div class="footer-bottom text text-center">
-        <p>&copy; 2026 by Pucakes.</p>
-    </div>
 </footer>
+
+{% load static %}
