@@ -256,6 +256,9 @@ class OrderItem(models.Model):
 
     @property
     def subtotal(self):
+        # Si falta cantidad o precio, devolvemos 0 para que no explote
+        if self.quantity is None or self.price is None:
+            return 0
         return self.quantity * self.price
 
 class BlockedDate(models.Model):
