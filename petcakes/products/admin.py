@@ -57,7 +57,7 @@ class ProductAdmin(admin.ModelAdmin):
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
     extra = 0
-    readonly_fields = ('subtotal_display',) # Solo lectura para no tocar precios históricos
+    readonly_fields = ('subtotal_display', 'details') # Solo lectura para no tocar precios históricos
     can_delete = False # No borrar ítems de un pedido histórico
 
     def subtotal_display(self, obj):

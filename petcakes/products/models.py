@@ -251,6 +251,13 @@ class OrderItem(models.Model):
         decimal_places=2
     )
 
+    # Un campo de texto simple para guardar "Mascota: Firulais, Edad: 3..."
+    details = models.TextField(
+        blank=True, 
+        null=True, 
+        verbose_name="Detalles Personalizados"
+    )
+
     def __str__(self):
         return f"{self.quantity} x {self.product.name}"
 

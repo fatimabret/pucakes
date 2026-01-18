@@ -54,13 +54,20 @@ def send_whatsapp(request):
         qty = int(item.get('quantity', 1))
         price = float(item['price'])
         subtotal = price * qty
-        
+
+        # Convertimos el diccionario de detalles a un texto simple
+        detalles_texto = ""
+        if 'details' in item and item['details']:
+            for label, value in item['details'].items():
+                detalles_texto += f"{label}: {value}\n"
+
         # 3. Guardar en Base de Datos (OrderItem)
         OrderItem.objects.create(
             order=order,
             product=product_instance,
             quantity=qty,
-            price=price
+            price=price,
+            details=detalles_texto
         )
 
         # 4. Agregar al Texto de WhatsApp
