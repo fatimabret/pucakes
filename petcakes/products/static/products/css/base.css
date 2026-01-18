@@ -123,3 +123,44 @@ input[type=number] {
   -moz-appearance: textfield; /* Para versiones actuales de Firefox */
   appearance: textfield;      /* Estándar moderno (elimina la advertencia) */
 }
+
+/* =========================
+   BOTÓN VOLVER ARRIBA
+========================= */
+#scrollToTopBtn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999; /* Por encima de todo */
+    width: 50px;
+    height: 50px;
+    border-radius: 50% !important; /* Redondo */
+    background-color: #fff0f5; /* Rosa muy clarito */
+    color: var(--primary-dark);
+    border: 2px solid var(--primary-dark);
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    
+    /* Configuración para ocultarlo/mostrarlo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* Invisible por defecto */
+    visibility: hidden;
+    pointer-events: none; /* No se puede cliquear si es invisible */
+}
+
+#scrollToTopBtn:hover {
+    background-color: var(--primary-dark);
+    color: white;
+    transform: translateY(-5px); /* Efecto de levitación */
+}
+
+/* Clase que le pondremos con Javascript para mostrarlo */
+#scrollToTopBtn.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}

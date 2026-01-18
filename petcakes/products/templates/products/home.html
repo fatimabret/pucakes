@@ -10,10 +10,11 @@
     <img src="{% static 'products/img/hero.jpeg' %}" alt="Pucakes hero" class="hero-image img-fluid">
 
     <div class="hero-overlay">
-        <h1>¡Bienvenidos a Pucakes!</h1>
-        <p>Repostería Personalizada para Mascotas</p>
+        <h1 class="animar-entrada">¡Bienvenidos a Pucakes!</h1>
+        
+        <p class="animar-entrada retraso-1">Repostería Personalizada para Mascotas</p>
 
-        <a href="{% url 'catalogo' %}" class="btn-hero">
+        <a href="{% url 'catalogo' %}" class="btn-hero animar-entrada retraso-2">
         Ver catálogo
         </a>
     </div>
@@ -171,29 +172,29 @@
 
 <section class="section about-section">
     <div class="container text-center">
-        <h1 class="mb-5">Acerca de Nosotros</h1>
+        <h1 class="mb-5 animar-scroll">Acerca de Nosotros</h1>
         
         <img src="{% static 'products/img/huella.png' %}" alt="Huella" class="section-image mb-5" style="max-width: 50px;">
         
         <div class="row justify-content-center">
             <div class="col-12 col-md-8 col-lg-6">
                 
-                <p class="about-text">
+                <p class="about-text animar-scroll retraso-1">
                     Somos un emprendimiento dedicado a crear momentos dulces y saludables para ellos que no son solo mascotas; son familia.
                 </p>
 
-                <p class="about-text">
+                <p class="about-text animar-scroll retraso-2">
                     🐾 Preparamos tortas, muffins y galletitas con ingredientes 100% aptos, porque cuidarlos es nuestra forma de decirles 'te quiero'.
                 </p>
                 
-                <p class="about-text">
+                <p class="about-text animar-scroll retraso-3">
                     Queremos que mimarlos sea fácil: diseñamos esta web para que elijas todo desde tu celular y coordinemos los detalles por WhatsApp, directo y sin vueltas.
                 </p>
 
             </div>
         </div>
 
-        <h5 class="about-footer-text mt-5">¡Cocinamos para los consentidos de la casa!</h5>
+        <h5 class="about-footer-text mt-5 animar-scroll retraso-3">¡Cocinamos para los consentidos de la casa!</h5>
     </div>
 </section>
 
@@ -215,4 +216,26 @@
         </section>
     </div>
 </section>
+
+<script>
+    // 1. Configuramos el "Ojo" (Observador)
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            // Si el elemento entra en la pantalla...
+            if (entry.isIntersecting) {
+                // ...le agregamos la clase 'visible' para que empiece la animación
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1 // Se activa cuando el 10% del elemento ya es visible
+    });
+
+    // 2. Buscamos todos los elementos con la clase "animar-scroll"
+    const hiddenElements = document.querySelectorAll('.animar-scroll');
+    
+    // 3. Le decimos al Ojo que los vigile a todos
+    hiddenElements.forEach((el) => observer.observe(el));
+</script>
+
 {% endblock %}
