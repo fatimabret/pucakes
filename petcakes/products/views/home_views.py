@@ -16,7 +16,7 @@ def politicas_view(request):
         },
         'reembolso': {
             'title': 'Política de Reembolso',
-            'text': 'Debido a que nuestros productos son alimentos perecederos y personalizados, no aceptamos devoluciones una vez entregado el producto, salvo error evidente en la decoración (ej. nombre mal escrito por nosotros).'
+            'text': 'Debido a que nuestros productos son alimentos perecederos y personalizados, NO aceptamos devoluciones una vez entregado o retirado el producto. Recomendamos revisar el producto al momento de la entrega.'
         },
         'privacidad': {
             'title': 'Privacidad de Datos',
