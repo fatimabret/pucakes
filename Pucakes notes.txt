@@ -6,6 +6,8 @@ cd C:\pucakes\petcakes
 
 python manage.py runserver
 
+subir a la plataforma:
+
 
 admin: fatima
 contraseña: contraseña
