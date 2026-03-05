@@ -153,14 +153,13 @@
             const dayOfWeek = dateObj.getDay(); // 0 = Domingo, 6 = Sábado
             
             // Si quieres bloquear Domingos, descomenta esto:
-            /*
+            
             if (dayOfWeek === 0) {
-                 errorDiv.textContent = "No realizamos entregas los domingos.";
+                 errorDiv.textContent = "No realizamos entregas los domingos.¡Estamos descansando! 🐶💤";
                  errorDiv.style.display = "block";
                  this.value = "";
                  return;
             }
-            */
 
             // Si pasa todo, ocultar error
             errorDiv.style.display = "none";

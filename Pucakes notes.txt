@@ -7,6 +7,15 @@ cd C:\pucakes\petcakes
 python manage.py runserver
 
 subir a la plataforma:
+git push en git
+En la consola bash; cd pucakes
+git pull
+	Si modifique css, img o js cd petcakes
+		python manage.py collectstatic
+		# (Escribe 'yes' si te pregunta)
+	Si modifique models o algo asi cd petcakes
+		python manage.py migrate
+En web el botón verde
 
 
 admin: fatima
