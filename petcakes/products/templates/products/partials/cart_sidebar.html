@@ -165,4 +165,7 @@
             errorDiv.style.display = "none";
         });
     });
+    {% block floating_menu %}
+    <!-- Al dejar este bloque vacío, Django sobreescribe el default y oculta la píldora flotante -->
+{% endblock %}
 </script>

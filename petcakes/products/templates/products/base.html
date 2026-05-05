@@ -39,6 +39,15 @@
 
     {% include 'products/partials/footer.html' %}
 
+    <!-- NAVBAR FLOTANTE ESTÉTICA -->
+    {% block floating_menu %}
+    <div class="floating-pill-nav">
+        <a href="{% url 'home' %}">Inicio</a>
+        <a href="{% url 'catalogo' %}">Catálogo</a>
+        <a href="{% url 'politicas' %}">Políticas</a>
+    </div>
+    {% endblock %}
+
   <button id="scrollToTopBtn" title="Volver arriba">
     <i class="fas fa-chevron-up"></i>
   </button>

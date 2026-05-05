@@ -1,29 +1,22 @@
 {% load static %}
-<nav class="navbar pucakes-navbar fixed-top">
+
+<!-- HEADER SUPERIOR (Logo y Carrito) -->
+<nav class="navbar pucakes-navbar fixed-top" style="background: transparent;">
   <div class="container-fluid align-items-center">
-
-    <button
-      class="navbar-toggler me-2"
-      type="button"
-      data-bs-toggle="offcanvas"
-      data-bs-target="#pucakesOffcanvas"
-      aria-controls="pucakesOffcanvas"
-      aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <a class="navbar-brand d-flex align-items-center gap-2 me-auto" href="{% url 'home' %}">
-      <img src="{% static 'products/img/logo.png' %}" alt="Pucakes logo" class="navbar-logo">
+    <!-- LOGO -->
+    <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'home' %}">
+      <img src="{% static 'products/img/logo.png' %}" alt="Pucakes logo" class="navbar-logo" style="height: 50px;">
     </a>
 
+    <!-- CARRITO -->
     <button 
-        class="btn position-relative" 
+        class="btn-cart-circle position-relative ms-auto" 
         type="button" 
         data-bs-toggle="offcanvas" 
         data-bs-target="#cartSidebar" 
-        aria-controls="cartSidebar"
-        style="border: none; background: transparent;"> 
-        <i class="fas fa-shopping-cart" style="font-size: 1.5rem; color: #701831;"></i> 
+        aria-controls="cartSidebar">
+        
+        <i class="fas fa-shopping-basket"></i>
         
         {% if cart_count > 0 %}
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
@@ -31,20 +24,5 @@
         </span>
         {% endif %}
     </button>
-
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="pucakesOffcanvas" aria-labelledby="pucakesOffcanvasLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="pucakesOffcanvasLabel">Pucakes</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav text-center gap-3">
-          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'catalogo' %}">Catalogo</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'politicas' %}">Politicas</a></li>
-        </ul>
-      </div>
-    </div>
-    
   </div>
 </nav>

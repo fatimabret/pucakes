@@ -1,19 +1,26 @@
-/* =====================
-   NAVBAR BOOTSTRAP
-===================== */
+/*  NAVBAR SUPERIOR  */
 .pucakes-navbar {
-  background-color: var(--white);
-  border-bottom: 1px solid var(--divider);
+  /* Fondo blanco semi-transparente */
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  
+  /* Efecto de desenfoque (blur) */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  
+  /* Borde rosita muy suave abajo */
+  border-bottom: 1px solid rgba(229, 128, 153, 0.3); 
+  
   padding: 0.5rem 1rem;
-  /* Forzamos la altura exacta para coordinar con el padding del body */
   height: 72px; 
   min-height: 72px;
 }
 
 /* Logo + marca */
 .navbar-logo {
-  height: 40px;
-  width: auto;
+  height: 50px; 
+  width: 50px;  
+  object-fit: cover; 
+  border-radius: 50%; 
 }
 
 .brand-text {
@@ -22,55 +29,93 @@
   font-weight: 600;
 }
 
-/* Links (Offcanvas) */
-.nav-link {
-  color: var(--primary-dark) !important;
-  font-size: 18px;
-}
-
-.nav-link:hover {
-  color: var(--accent) !important;
-}
-
-/* Carrito */
-.cart-icon {
-  display: flex;
-  align-items: center;
-}
-
-.cart-icon img {
-  width: 26px;
-  height: 26px;
-  object-fit: contain;
-}
-
-/* Hamburguesa */
-.navbar-toggler {
-  border: none;
-  padding: 0;
-}
-
-.navbar-toggler:focus {
-  box-shadow: none;
-}
-
-.navbar-toggler-icon {
-  background-image: none;
-  display: flex;
-  align-items: center;
-}
-
-.navbar-toggler-icon::before {
-  content: "\f0c9";
-  font-family: "Font Awesome 5 Free"; 
-  font-weight: 900;
-  font-size: 24px;
-  color: var(--primary-dark);
-}
-
-/* Si no usas FontAwesome, descomenta esta línea y borra la de arriba */
-/* .navbar-toggler-icon::before { content: "≡"; font-size: 30px; color: var(--primary-dark); } */
-
-/* OFFCANVAS */
+/*  CARRITO  */
+/* Mantenemos esto porque el carrito lateral sigue usando estas clases */
 .offcanvas { background-color: var(--white); }
 .offcanvas-title { color: var(--primary-dark); font-size: 22px; }
+
+
+/*  NAVBAR FLOTANTE  */
+.floating-pill-nav {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    background-color: #ffffff;
+    border-radius: 50px;
+    padding: 12px 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    
+    display: flex;
+    align-items: center;
+    gap: 25px; 
+    z-index: 1030;
+}
+
+.floating-pill-nav a {
+    text-decoration: none;
+    color: #333; 
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.floating-pill-nav a:hover {
+    color: var(--primary-dark, #701831);
+    transform: translateY(-2px);
+}
+
+/* =====================
+   BOTÓN DEL CARRITO REDONDO
+===================== */
+.btn-cart-circle {
+  background-color: white !important;
+  border: none !important;
+  width: 45px !important;        
+  height: 45px !important;
+  border-radius: 50% !important;
+  display: flex !important;      
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+  padding: 0 !important;         
+  transition: transform 0.2s ease;
+}
+
+/* Efecto al pasar el mouse */
+.btn-cart-circle:hover {
+    transform: scale(1.05);
+}
+
+/* El icono del carrito adentro */
+.btn-cart-circle i {
+  font-size: 1.3rem !important; 
+  color: var(--primary-dark, #701831) !important;
+  margin-right: -2px; 
+}
+
+/* Ajuste para celulares muy chiquitos */
+/* =====================
+   RESPONSIVE: CELULARES
+===================== */
+@media (max-width: 576px) {
+    .floating-pill-nav {
+        /* Hacemos que la píldora "abrace" el texto sin estirarse a los bordes */
+        width: max-content; 
+        max-width: 95%;     /* Solo por si la pantalla es ultra diminuta */
+        
+        /* La hacemos más delgadita de alto y ajustamos los lados */
+        padding: 10px 22px; 
+        
+        /* Juntamos un poquito más las palabras */
+        gap: 18px;          
+        
+        /* La bajamos un poquito más para que no estorbe la lectura */
+        bottom: 20px;       
+    }
+    
+    .floating-pill-nav a {
+        font-size: 0.9rem;  /* Letra apenitas más chica para que todo encaje perfecto */
+    }
+}
