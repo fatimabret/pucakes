@@ -13,7 +13,7 @@ def cake_detail(request, product_id):
         animal_type = request.POST.get('animal_type')
         flavor = request.POST.get('flavor')
         # Capturamos el color principal
-        cream_color_base = request.POST.get('cream_color')
+        cream_color_base = request.POST.get('color_crema')
         decoration_color = request.POST.get('decoration_color')
         
         # Verificamos si eligió la opción doble y la formateamos
