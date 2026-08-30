@@ -109,12 +109,38 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="fw-bold">Crema</label>
-                                <select name="cream_color" class="form-select">
-                                    <option>Azul</option>
-                                    <option>Rosa</option>
-                                    <option>Beige</option>
+                                <label for="color_crema" class="form-label text-primary-dark fw-bold">Color de Crema</label>
+                                <select class="form-select" id="color_crema" name="color_crema" onchange="toggleColoresPersonalizados()">
+                                    <option value="Beige">Beige</option>
+                                    <option value="Rosa">Rosa</option>
+                                    <option value="Celeste">Celeste</option>
+                                    <option value="Lila">Lila</option>
+                                    <option value="Personalizar">Personalizar (2 colores)</option>
                                 </select>
+                            </div>
+
+                            <div id="colores_personalizados" style="display: none;" class="mb-3 p-3 border rounded" style="background-color: var(--bg-secondary);">
+                                <p class="mb-2 text-subtitle small fw-bold">Elige tus dos colores:</p>
+                                <div class="d-flex gap-2">
+                                    <div class="w-50">
+                                        <label class="form-label small">Color 1</label>
+                                        <select class="form-select form-select-sm" name="color_crema_1" id="color_crema_1" onchange="evitarDuplicados()">
+                                            <option value="Beige" selected>Beige</option>
+                                            <option value="Rosa">Rosa</option>
+                                            <option value="Celeste">Celeste</option>
+                                            <option value="Lila">Lila</option>
+                                        </select>
+                                    </div>
+                                    <div class="w-50">
+                                        <label class="form-label small">Color 2</label>
+                                        <select class="form-select form-select-sm" name="color_crema_2" id="color_crema_2" onchange="evitarDuplicados()">
+                                            <option value="Beige">Beige</option>
+                                            <option value="Rosa" selected>Rosa</option>
+                                            <option value="Celeste">Celeste</option>
+                                            <option value="Lila">Lila</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="mb-4">
@@ -138,6 +164,36 @@
     <script>
     function changeImage(src) {
         document.getElementById('mainImage').src = src;
+    }
+
+    function toggleColoresPersonalizados() {
+        const selectorPrincipal = document.getElementById('color_crema');
+        const divPersonalizados = document.getElementById('colores_personalizados');
+        
+        if (selectorPrincipal.value === 'Personalizar') {
+            divPersonalizados.style.display = 'block';
+            evitarDuplicados();
+        } else {
+            divPersonalizados.style.display = 'none';
+        }
+    }
+
+    function evitarDuplicados() {
+        const select1 = document.getElementById('color_crema_1');
+        const select2 = document.getElementById('color_crema_2');
+        
+        Array.from(select1.options).forEach(opt => opt.disabled = false);
+        Array.from(select2.options).forEach(opt => opt.disabled = false);
+        
+        if (select1.value) {
+            const opcionBloquear2 = select2.querySelector(`option[value="${select1.value}"]`);
+            if (opcionBloquear2) opcionBloquear2.disabled = true;
+        }
+        
+        if (select2.value) {
+            const opcionBloquear1 = select1.querySelector(`option[value="${select2.value}"]`);
+            if (opcionBloquear1) opcionBloquear1.disabled = true;
+        }
     }
     </script>
 </section>

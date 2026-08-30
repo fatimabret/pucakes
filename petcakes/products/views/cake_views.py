@@ -12,8 +12,17 @@ def cake_detail(request, product_id):
         pet_age_str = request.POST.get('pet_age', '')
         animal_type = request.POST.get('animal_type')
         flavor = request.POST.get('flavor')
-        cream_color = request.POST.get('cream_color')
+        # Capturamos el color principal
+        cream_color_base = request.POST.get('cream_color')
         decoration_color = request.POST.get('decoration_color')
+        
+        # Verificamos si eligió la opción doble y la formateamos
+        if cream_color_base == 'Personalizar':
+            color_1 = request.POST.get('color_crema_1', '')
+            color_2 = request.POST.get('color_crema_2', '')
+            cream_color = f"{color_1} y {color_2}"
+        else:
+            cream_color = cream_color_base
         
         # === VALIDACIONES DE SEGURIDAD ===
         

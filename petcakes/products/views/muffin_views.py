@@ -21,7 +21,14 @@ def muffin_detail(request, product_id):
         elif quantity > 24:
             quantity = 24
         
-        cream_color = request.POST.get('cream_color')
+        cream_color_base = request.POST.get('cream_color')
+        
+        if cream_color_base == 'Personalizar':
+            color_1 = request.POST.get('color_crema_1', '')
+            color_2 = request.POST.get('color_crema_2', '')
+            cream_color = f"{color_1} y {color_2}"
+        else:
+            cream_color = cream_color_base
         
         # 2. Creamos el diccionario del producto
         cart_item = {

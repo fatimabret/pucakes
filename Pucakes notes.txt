@@ -3,7 +3,6 @@ python manage.py migrate
 
 levantar el servidor: 
 cd C:\pucakes\petcakes
-
 python manage.py runserver
 
 subir a la plataforma:
@@ -33,6 +32,10 @@ Cake:
 
 Muffin: color de crema, cantidad (mín 6 – máx 24)
 
+
+
+
+
 Mensaje de WhatsApp:
  ¡Hola Pucakes! Confirmar mi pedido #
  Torta Rubí
@@ -56,6 +59,3 @@ Mensaje de WhatsApp:
 Seña mínima (50%): $ (Requerida para confirmar fecha)
 
 Quedo a la espera para coordinar pago y entrega.
-
-
-FALTA:
